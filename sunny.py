@@ -37,7 +37,7 @@ options = {
 def usage():
     print(
         ' -h help \n' \
-        ' -a clientid xxxxxxxxxxxxxxxx\n' \
+        ' -c clientid xxxxxxxxxxxxxxxx\n' \
     )
     sys.exit()
 
