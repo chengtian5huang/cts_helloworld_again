@@ -395,7 +395,7 @@ if __name__ == '__main__':
     logger = logging.getLogger('%s' % 'client')
     logger.debug('python-ngrok v1.42')
     print("serving at port 8000")
-    httpd = threading.Thread(target=SocketServer.TCPServer(("", 8000), SimpleHTTPRequestHandler).serve_forever)
+    httpd = threading.Thread(target=socketserver.TCPServer(("", 8000), SimpleHTTPRequestHandler).serve_forever)
     httpd.setDaemon(True)
     httpd.start()
     print("server started!!!")
