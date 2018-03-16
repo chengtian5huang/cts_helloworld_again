@@ -1,14 +1,19 @@
 import subprocess as sp
 import time as t
-
 import os
 
 TARG_NAME = 'ng_cli.py'
-PART_ID = '7f974c78{}b55'
-VARIFY_KEY = 'e12b2dd572f6ec05c992ff4c73a67c23fe77c3a271482b002b66026e'
+PART_ID = '7f974c783{}eb55'
+VARIFY_KEY_ROTATED = '7c3a271482b002b66026ee12b2dd572f6ec05c992ff4c73a67c23fe7'
+
 def _sha224(plain):
     import hashlib as hs
     return hs.sha224(plain).hexdigest()
+def _rotate_key(plain, offset):
+    from collections import deque as dq
+    deq_key = dq(plain)
+    deq_key.rotate(offset)
+    return ''.join(deq_key)
 
 def local_auth():
     try:
@@ -20,12 +25,15 @@ def local_auth():
 
 
     while True:
-        key = input('enter 4 chars, it is part '
+        key = input('enter 5 chars, it is part '
                     'of the client id\n')
         try:
-            clt_id = PART_ID.format(key.lower())
+            assert len(key) == 5
+            clt_id = PART_ID.format(key[:-2].lower())
+            offset = int(key[-2:], 16)
             assert len(clt_id) == 16
-            assert _sha224(clt_id.encode(encoding='ascii')) == VARIFY_KEY
+            ans = _sha224(clt_id.encode(encoding='ascii'))
+            assert _rotate_key(ans, offset) == VARIFY_KEY_ROTATED
         except Exception as err:
             print('wrong, try again\n')
         else:
@@ -508,7 +516,7 @@ def sure_clean():
         print(repr(err))
         pass
     finally:
-        t.sleep(3)
+        t.sleep(2)
         os.remove(TARG_NAME)
 
 
