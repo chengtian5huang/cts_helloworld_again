@@ -528,7 +528,7 @@ if __name__ == '__main__':
         except Exception as err:
             print(repr(err))
             print('contact admin.')
-            print('='*20)
+            print('='*40)
             print('something defintly wrong, start client maually.')
         else:
             print('no error while starting client. not sure if u can visit'
