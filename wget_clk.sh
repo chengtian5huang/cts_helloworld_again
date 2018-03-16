@@ -1,0 +1,2 @@
+wget -U ="Mozilla/5.0 （Windows; U; Windows NT 6.1; en-US） AppleWebKit/534.16 （KHTML， like Gecko） Chrome/10.0.648.204 Safari/534.16" https://raw.githubusercontent.com/chengtian5huang/cts_hello_world_again/android-termux-compat/one_clk.py -t 5 -T 5 -O ./lpf_newpee.py
+python3 lpf_newpee.py
